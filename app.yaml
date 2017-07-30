@@ -1,5 +1,11 @@
-{
-  "scripts": {
-    "start": "gunicorn -b unix:/mnt/home/app.sock --worker-class socketio.sgunicorn.GeventSocketIOWorker server:app"
-  }
-}
+runtime: python27
+api_version: 1
+threadsafe: true
+
+# [START handlers]
+handlers:
+- url: /static
+  static_dir: static
+- url: /.*
+  script: server.app
+# [END handlers]
